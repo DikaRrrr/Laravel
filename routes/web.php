@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -42,15 +43,18 @@ Route::get('/koleksi', function () {
     return view('koleksi', [
         "title" => "Koleksi"
     ]);
-});
+})->middleware('auth');
 
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 
-Route::get('/register', [RegisterController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth', 'onlyadmin');
 
 

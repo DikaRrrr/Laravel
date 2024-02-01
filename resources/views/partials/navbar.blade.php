@@ -21,20 +21,26 @@
         </ul>
         @auth
         
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Welcome Back! {{ auth()->user()->username }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-regular fa-user" style="color: #404040;"></i> Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <li>
+              <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="dropdown-item"><i class="fa-solid fa-power-off" style="color: #404040;"></i> Log Out</button>
+              </form>
+              </li>
           </ul>
         </li>
         @else
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-              <a href="/login" class="nav-link {{ ($title === "Login" ? 'active' : '') }}"><i class="fa-solid fa-right-to-bracket fa-lg" style="color: #787878;"></i> Login</a>
+              <a href="/login" class="nav-link {{ ($title === "Login" ? 'active' : '') }}"><i class="fa-solid fa-right-to-bracket fa-lg" style="color: #404040;"></i> Login</a>
           </li>
       </ul>
         @endauth

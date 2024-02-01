@@ -23,6 +23,8 @@ class User extends Authenticatable
     //     'password',
     // ];
 
+    protected $primaryKey = 'UserID';
+
     protected $guarded = [];
 
     /**

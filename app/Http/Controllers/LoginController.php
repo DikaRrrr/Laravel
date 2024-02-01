@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -23,10 +27,29 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if(Auth::user()->posisi == 'admin') {
+                return redirect('dashboard');
+            }
+            
+            if(Auth::user()->posisi == 'user') {
+                return redirect('home');
+            }
  
             return redirect()->intended('home');
         }
 
         return back()->with('LoginError', 'Login Gagal');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+ 
+    $request->session()->invalidate();
+ 
+    $request->session()->regenerateToken();
+ 
+    return redirect('/');
     }
 }
