@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('koleksibuku', function (Blueprint $table) {
-            $table->id('KoleksiID');
-            $table->foreignid('UserID');
-            $table->foreign('UserID')->references('UserID')->on('users');
-            $table->foreignid('BukuID');
-            $table->foreign('BukuID')->references('BukuID')->on('buku');
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('buku_id');
             $table->timestamps();
         });
     }

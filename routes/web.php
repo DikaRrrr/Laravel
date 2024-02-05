@@ -55,6 +55,12 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-Route::get('/dashboard', [AdminController::class, 'index'])->middleware('auth', 'onlyadmin');
-
+Route::middleware('auth', 'onlyadmin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/catagory', [AdminController::class, 'catagory']);
+    Route::post('/add_catagory', [AdminController::class, 'add_catagory']);
+    Route::get('/delete_catagory/{id}', [AdminController::class, 'delete_catagory']);
+    Route::get('/add_book', [AdminController::class, 'add_book']);
+    Route::post('/store_book', [AdminController::class, 'store_book']);
+});
 

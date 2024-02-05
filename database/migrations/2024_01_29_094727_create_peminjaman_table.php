@@ -12,11 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('peminjaman', function (Blueprint $table) {
-            $table->id('PeminjamanID');
-            $table->foreignid('UserID');
-            $table->foreign('UserID')->references('UserID')->on('users');
-            $table->foreignid('BukuID');
-            $table->foreign('BukuID')->references('BukuID')->on('buku');
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('buku_id');
             $table->date('tanggalpeminjaman');
             $table->date('tanggalpengembalian');
             $table->string('statuspeminjaman');
