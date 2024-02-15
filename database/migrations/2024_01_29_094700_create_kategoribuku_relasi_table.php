@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('kategoribuku_relasi', function (Blueprint $table) {
             $table->id();
-            $table->integer('buku_id');
-            $table->integer('kategori_id');
+            $table->unsignedBigInteger('buku_id');
+            $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('kategori_id');
+            $table->foreign('kategori_id')->references('id')->on('kategoribuku')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Kategoribuku;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Buku extends Model
 {
     use HasFactory;
 
-    public $table = 'buku';
+    protected $table = 'buku';
 
     protected $fillable = [
         'judul',
@@ -17,4 +19,10 @@ class Buku extends Model
         'penerbit',
         'tahunterbit'
     ];
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Kategoribuku::class, 'kategoribuku_relasi', 'buku_id', 'kategori_id');
+    }
+
 }

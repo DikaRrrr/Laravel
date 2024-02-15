@@ -53,25 +53,64 @@ class AdminController extends Controller
     {
 
         $catagory=Kategoribuku::all();
-        return view('admin.buku',compact('catagory'), [
+        $book=Buku::all();
+        return view('admin.buku',[
+            'catagory' => $catagory,
+            'book' => $book,
             'title' => "Buku"
         ]);
     }
 
     public function store_book(Request $request)
     {
+        
         $validated = $request->validate([
             'judul' => 'required',
             'penulis' => 'required',
             'penerbit' => 'required',
             'tahunterbit' => 'required'
+
         ]);
 
         
         
 
         $book = Buku::create($request->all());
+        $book->categories()->sync($request->categories);
         return redirect('add_book')->with('addSuccess', 'Buku Berhasil Ditambahkan');
+    }
+
+    public function delete_book($id)
+    {
+        $book=Buku::find($id);
+        $book->delete();
+        return redirect('add_book')->with('deleteSuccess', 'Buku Berhasil Dihapus');
+    }
+
+    public function update_book($id)
+    {
+
+        $book=Buku::find($id);
+        $catagory=Kategoribuku::all();
+
+        return view('admin.update_book', [
+            'book' => $book,
+            'catagory' => $catagory,
+            'title' => "Update Buku"
+        ]);
+    }
+
+    public function update_book_confirm(Request $request, $id)
+    {
+
+        $book=Buku::find($id);
+        $book->update($request->all());
+
+        if($request->categories) {
+            $book->categories()->sync($request->categories);
+        }
+
+        return redirect()->back()->with('addSuccess', 'Buku Berhasil Diupdate');
     }
 
 

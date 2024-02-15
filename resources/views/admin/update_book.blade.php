@@ -3,7 +3,11 @@
   <head>
     <title>Admin | {{ $title }}</title>
     <!-- Required meta tags -->
+    <base href="/public">
+
     @include('admin.css')
+
+    
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -76,85 +80,48 @@
                   
               @endif
 
-              <form action="/store_book" method="POST">
+              <form action="{{ url('update_book_confirm', $book->id) }}" method="POST">
                   @csrf
                 <div class="div_center">
-                    <h2 class="h2_font">Tambah Buku</h2>
+                    <h2 class="h2_font">Update Buku</h2>
 
                     <div class="div_design">
                         <label for="">Judul : </label>
-                        <input type="text" name="judul" placeholder="Masukan Judul Buku">
+                        <input type="text" name="judul" placeholder="Masukan Judul Buku" value="{{ $book->judul }}">
                     </div>
 
                     <div class="div_design">
                         <label for="">Penulis :</label>
-                        <input type="text" name="penulis" placeholder="Masukan Penulis Buku">
+                        <input type="text" name="penulis" placeholder="Masukan Penulis Buku" value="{{ $book->penulis }}">
                     </div>
 
                     <div class="div_design">
                         <label for="">Penerbit : </label>
-                        <input type="text" name="penerbit" placeholder="Masukan Penerbit Buku">
+                        <input type="text" name="penerbit" placeholder="Masukan Penerbit Buku" value="{{ $book->penerbit }}">
                     </div>
 
                     <div class="div_design">
                         <label for="">Tahun Terbit :</label>
-                        <input type="number" name="tahunterbit" placeholder="Masukan Tahun Terbit">
+                        <input type="number" name="tahunterbit" placeholder="Masukan Tahun Terbit" value="{{ $book->tahunterbit }}">
                     </div>
 
                     <div class="div_design">
                         <label for="">Kategori Buku :</label>
                         <select name="categories" id="catagory" required>
-                            <option value="" selected>Add category</option>
+                            <option value="">Ubah Kategori</option>
                             @foreach ($catagory as $catagory)
-                                <option value="{{ $catagory->id }}">{{ $catagory->namakategori }}</option>
-                            @endforeach
+                            <option value="{{ $catagory->id }}">{{ $catagory->namakategori }}</option>
+                        @endforeach
                         </select>
                     </div>
 
                     <div class="div_design">
-                        <input type="submit" class="btn btn-primary">
+                        <input type="submit" class="btn btn-primary" value="Update Buku">
                     </div>
                 </form>
                 </div>
 
-                <div class="table-responsive">
-                    <table class="table mt-4">
-                      <thead>
-                        <tr>
-                          <th>No.</th>
-                          <th> ID </th>
-                          <th> Judul </th>
-                          <th> Penulis </th>
-                          <th> Penerbit </th>
-                          <th> Tahun Terbit </th>
-                          <th> Kategori </th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($book as $book)
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $book->id }}</td>
-                            <td>{{ $book->judul }}</td>
-                            <td>{{ $book->penulis }}</td>
-                            <td>{{ $book->penerbit }}</td>
-                            <td>{{ $book->tahunterbit }}</td>
-                            <td>
-                              @foreach ($book->categories as $category)
-                                  {{ $category->namakategori }}
-                              @endforeach
-                            </td>
-                            <td>
-                                  <a href="{{ url('update_book',$book->id) }}" class="btn btn-primary">Edit</a>
-                                  <a class="btn btn-danger" href="{{ url('delete_book',$book->id) }}" onclick="return confirm('Apakah anda yakin akan menghapus Buku ini ?')">Delete</a>
-                            </td>
 
-                        
-                      </tbody>
-                      @endforeach
-                    </table>
-                  </div>
-                  
 
 
             </div>
