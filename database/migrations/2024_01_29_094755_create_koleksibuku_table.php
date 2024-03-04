@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('koleksibuku', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('buku_id');
-            $table->foreign('buku_id')->references('id')->on('buku');
+            $table->foreign('buku_id')->references('id')->on('buku')->onDelete('cascade');
             $table->timestamps();
         });
     }

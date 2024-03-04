@@ -32,3 +32,11 @@
     background-color: whitesmoke;
     padding: 1.5rem;
 }
+
+.img-cover {
+    text-align: center;
+}
+
+.book-list {
+    margin-top: 3.5rem;
+}

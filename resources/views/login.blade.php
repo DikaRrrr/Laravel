@@ -43,6 +43,7 @@
 
                 <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
 
+                <small class="d-block text-center mt-3"><a href="#">Lupa Password ?</a></small>
                 <small class="d-block text-center mt-3">Belum Punya Akun? <a href="/register">Daftar Sekarang!</a></small>
 
                 <p class="d-flex mt-4 mb-3 text-body-secondary justify-content-end">&copy; 2024</p>

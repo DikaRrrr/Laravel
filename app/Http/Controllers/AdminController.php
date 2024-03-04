@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategoribuku;
+use App\Models\Peminjaman;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -16,11 +17,13 @@ class AdminController extends Controller
         $bookCount = Buku::count();
         $catagoryCount = Kategoribuku::count();
         $userCount = User::count();
+        $peminjaman = Peminjaman::all();
 
         return view('admin.dashboard', [
             'book_count' => $bookCount,
             'catagory_count' => $catagoryCount,
             'user_count' => $userCount,
+            'peminjaman' => $peminjaman,
             'title' => "Dashboard"
         ]);
     }
@@ -111,6 +114,37 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('addSuccess', 'Buku Berhasil Diupdate');
+    }
+
+    public function data_peminjaman()
+    {
+        $peminjaman =  Peminjaman::all();
+
+        return view('admin.data_peminjaman', [
+            'title' => "Data Peminjaman",
+            'peminjaman' => $peminjaman
+        ]);
+    }
+
+    public function kembalikan_buku($id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+
+        // Update status peminjaman
+        $peminjaman->statuspeminjaman = 'Dikembalikan';
+        $peminjaman->save();
+
+        return redirect()->back()->with('success', 'Buku berhasil Dikembalikan.');
+    }
+
+    public function data_users ()
+    {
+        $user = User::all();
+
+        return view('admin.data_users', [
+            'title' => "Users",
+            'user' => $user
+        ]);
     }
 
 

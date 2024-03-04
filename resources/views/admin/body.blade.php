@@ -65,36 +65,33 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th> ID </th>
-                      <th> Client Name </th>
-                      <th> Buku </th>
+                      <th> ID Peminjaman</th>
+                      <th> User ID </th>
+                      <th> Buku ID </th>
                       <th> Tanggal Peminjaman </th>
                       <th> Tanggal Pengembalian </th>
                       <th> Status Pengembalian </th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach ($peminjaman as $peminjaman)
                     <tr>
-                      <td> 02312 </td>
-                      <td> $14,500 </td>
-                      <td> Dashboard </td>
-                      <td> Credit card </td>
-                      <td> 04 Dec 2019 </td>
+                      <td> {{ $peminjaman->id }} </td>
+                      <td> {{ $peminjaman->user_id }} </td>
+                      <td> {{ $peminjaman->buku_id }} </td>
+                      <td> {{ $peminjaman->tanggalpeminjaman }}</td>
+                      <td> {{ $peminjaman->tanggalpengembalian }} </td>
                       <td>
-                        <div class="badge badge-outline-success">Dikembalikan</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td> 02312 </td>
-                      <td> $14,500 </td>
-                      <td> Website </td>
-                      <td> Cash on delivered </td>
-                      <td> 04 Dec 2019 </td>
-                      <td>
-                        <div class="badge badge-outline-warning">Belum Dikembalikan</div>
+                        @if ($peminjaman->statuspeminjaman=="Dikembalikan")
+                        <div class="badge badge-outline-success">{{ $peminjaman->statuspeminjaman }}</div>
+                        @else
+                        <div class="badge badge-outline-warning">{{ $peminjaman->statuspeminjaman }}</div>
+                        @endif
+                        
                       </td>
                     </tr>
                   </tbody>
+                  @endforeach
                 </table>
               </div>
             </div>

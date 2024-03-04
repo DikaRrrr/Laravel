@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Models\Peminjaman;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Middleware\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +20,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
-Route::get('/home', function () {
-    return view('home', [
-        "title" => "Home"
-    ]);
-});
+
 
 Route::get('/about', function () {
     return view('about', [
@@ -65,6 +60,25 @@ Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::get('/delete_book/{id}', [AdminController::class, 'delete_book']);
     Route::get('/update_book/{id}', [AdminController::class, 'update_book']);
     Route::post('/update_book_confirm/{id}', [AdminController::class, 'update_book_confirm']);
+    Route::get('/data_peminjaman', [AdminController::class, 'data_peminjaman']);
+    Route::post('/kembalikan_buku/{id}', [AdminController::class, 'kembalikan_buku']);
+    Route::get('/data_users', [AdminController::class, 'data_users']);
 
 });
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::middleware('auth', 'onlyuser')->group(function () {
+    Route::get('/peminjaman/{id}', [PeminjamanController::class, 'index']);
+    Route::post('/pinjam_buku/{id}', [PeminjamanController::class, 'pinjam_buku']);
+    Route::get('/koleksi', [PeminjamanController::class, 'koleksi']);
+    Route::post('/add_comment/{id}', [PeminjamanController::class, 'add_comment']);
+    Route::post('/delete_comment/{id}', [PeminjamanController::class, 'delete_comment']);
+
+});
+
+
+
+
 
