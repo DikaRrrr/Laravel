@@ -60,7 +60,7 @@
                         <span class="input-group-text">Tambahkan Ulasan</span>
                         <input type="text" name="ulasan" class="form-control">
                       </div>
-                      <input type="submit" class="btn btn-secondary mt-3" value="Posting Ulasan">
+                      <input type="submit" class="btn btn-primary mt-3" value="Posting Ulasan">
                 </form>
 
                 <div class="row mt-5">

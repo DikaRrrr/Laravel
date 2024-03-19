@@ -48,7 +48,15 @@
         @include('admin.header')
         <!-- partial -->
         <div class="main-panel">
-            <div class="content-wrapper">                 
+            <div class="content-wrapper">
+              
+              @if (session()->has('addSuccess'))
+              <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                {{ session('addSuccess') }}
+              </div>
+              @endif
+
                 <div class="row ">
                     <div class="col-12 grid-margin">
                       <div class="card">
@@ -64,6 +72,7 @@
                                   <th> Nama Lengkap </th>
                                   <th> Alamat </th>
                                   <th> Posisi </th>
+                                  <th> Action </th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -75,6 +84,10 @@
                                   <td> {{ $user->namalengkap }}</td>
                                   <td> {{ $user->alamat }} </td>
                                   <td>{{ $user->posisi }}</td>
+                                  <td>
+                                    <a href="{{ url('delete_user',$user->id) }}" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus permanen pengguna ini ?')">Hapus Akun</a>
+                                    <a href="{{ url('update_password',$user->id) }}" class="btn btn-primary">Edit Password</a>
+                                  </td>
                                 </tr>
                               </tbody>
                               @endforeach

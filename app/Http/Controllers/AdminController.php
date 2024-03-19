@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Buku;
-use App\Models\Kategoribuku;
-use App\Models\Peminjaman;
 use App\Models\User;
+use App\Models\Peminjaman;
+use App\Models\Kategoribuku;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -146,6 +148,60 @@ class AdminController extends Controller
             'user' => $user
         ]);
     }
+
+    public function update_catagory($id)
+    {
+
+        $catagory=Kategoribuku::find($id);
+
+        return view('admin.update_catagory', [
+            'catagory' => $catagory,
+            'title' => "Update Kategori"
+        ]);
+    }
+
+    public function update_catagory_confirm(Request $request, $id)
+{
+    $catagory=Kategoribuku::find($id);
+    $catagory->update($request->all());
+
+    return redirect()->back()->with('addSuccess', 'Kategori Berhasil Diupdate');
+}
+
+public function delete_user($id)
+{
+    $user=User::find($id);
+    $user->delete();
+    return redirect()->back()->with('addSuccess', 'Pengguna berhasil Dihapus.');
+}
+
+public function update_password($id)
+{
+    $user=User::find($id);
+
+        return view('admin.update_password', [
+            'user' => $user,
+            'title' => "Update Password"
+        ]);
+}
+
+public function update_password_confirm(Request $request, $id)
+{
+    $request->validate([
+        'new_password' => 'required|min:8',
+    ]);
+
+    $user = User::findOrFail($id);
+
+    // Check if the old password matches the current password
+
+    // Update the password
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return redirect()->back()->with('addSuccess', 'Password updated successfully.');
+}
+
 
 
 }

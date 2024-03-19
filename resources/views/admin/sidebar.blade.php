@@ -16,13 +16,6 @@
         </a>
       </li>
       <li class="nav-item menu-items">
-        <a class="nav-link" href="/add_book">
-          <span class="menu-icon">
-            <i class="mdi mdi-book-open-variant"></i>
-          </span>
-          <span class="menu-title">Buku</span>
-        </a>
-      <li class="nav-item menu-items">
         <a class="nav-link" href="catagory">
           <span class="menu-icon">
             <i class="mdi mdi-playlist-play"></i>
@@ -30,6 +23,13 @@
           <span class="menu-title">Kategori Buku</span>
         </a>
       </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/add_book">
+          <span class="menu-icon">
+            <i class="mdi mdi-book-open-variant"></i>
+          </span>
+          <span class="menu-title">Buku</span>
+        </a>
       <li class="nav-item menu-items">
         <a class="nav-link" href="/data_peminjaman">
           <span class="menu-icon">

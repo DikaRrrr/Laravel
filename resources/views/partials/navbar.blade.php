@@ -27,8 +27,6 @@
             Welcome Back! {{ auth()->user()->username }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#"><i class="fa-regular fa-user" style="color: #404040;"></i> Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
             <li>
               <form action="/logout" method="POST">
                 @csrf

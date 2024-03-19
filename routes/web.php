@@ -4,6 +4,7 @@ use App\Models\Peminjaman;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PeminjamanController;
@@ -50,6 +51,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->middleware('guest');
+Route::post('/forgot_password', [ForgotPasswordController::class, 'forgot_password']);
+
 Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
     Route::get('/catagory', [AdminController::class, 'catagory']);
@@ -63,6 +67,11 @@ Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::get('/data_peminjaman', [AdminController::class, 'data_peminjaman']);
     Route::post('/kembalikan_buku/{id}', [AdminController::class, 'kembalikan_buku']);
     Route::get('/data_users', [AdminController::class, 'data_users']);
+    Route::get('/update_catagory/{id}', [AdminController::class, 'update_catagory']);
+    Route::post('/update_catagory_confirm/{id}', [AdminController::class, 'update_catagory_confirm']);
+    Route::get('/delete_user/{id}', [AdminController::class, 'delete_user']);
+    Route::get('/update_password/{id}', [AdminController::class, 'update_password']);
+    Route::post('/update_password_confirm/{id}', [AdminController::class, 'update_password_confirm']);
 
 });
 

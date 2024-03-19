@@ -3,7 +3,13 @@
   <head>
     <title>Admin | {{ $title }}</title>
     <!-- Required meta tags -->
+    <base href="/public">
+
     @include('admin.css')
+
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <style>
         .div_center {
@@ -22,6 +28,19 @@
           text-align: center;
           border: 1px solid grey;
           color: grey;
+        }
+
+        .text_color {
+            color: black:
+        }
+
+        label {
+            display: inline-block;
+            width: 200px
+        }
+
+        .div_design {
+            padding-bottom: 15px;
         }
     </style>
   </head>
@@ -48,37 +67,39 @@
                 {{ session('deleteSuccess') }}
               </div>
               @endif
-                  
-                  
-                <div class="div_center">
-                    <h2 class="h2_font">Add Catagory</h2>
-                    <form action="/add_catagory" method="POST">
-                      @csrf
-                        <input type="text" name="catagory" placeholder="Nama Kategori">
 
-                        <button class="btn btn-primary" type="submit">Add</button>
-                    </form>
+              @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                        
+                    @endforeach
+                </ul>
+              </div>
+                  
+              @endif
+
+              <form action="{{ url('update_password_confirm', $user->id) }}" method="POST">
+                  @csrf
+                <div class="div_center">
+                    <h2 class="h2_font">Update Password</h2>
+
+
+
+                    <div class="div_design">
+                        <label for="new_password">New Password : </label>
+                        <input type="password" name="new_password" id="new_password">
+                    </div>
+
+                    <div class="div_design">
+                        <input type="submit" class="btn btn-primary" value="Update Password">
+                    </div>
+                </form>
                 </div>
 
-                <table class="center">
-                  
-                      
-                  
-                  <tr>
-                    <th>Kategori</th>
-                    <th>Action</th>
-                  </tr>
-                  <tr>
-                    @foreach ($data as $data)
 
-                    <td>{{ $data->namakategori }}</td>
-                    <td><a class="btn btn-danger" href="{{ url('delete_catagory',$data->id) }}" onclick="return confirm('Apakah anda yakin akan menghapus Kategori ini ?')">Delete</a>
-                        <a href="{{ url('update_catagory',$data->id) }}" class="btn btn-primary">Edit</a>
-                    </td>
-                  </tr>
 
-                  @endforeach
-                </table>
 
             </div>
         </div>
@@ -86,5 +107,8 @@
     <!-- plugins:js -->
         @include('admin.script')
     <!-- End custom js for this page -->
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </body>
 </html>

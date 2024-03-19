@@ -22,9 +22,9 @@
           @endif
 
           <main class="form-signin w-100 m-auto">
-            <form action="/login" method="POST">
+            <form action="/forgot_password" method="POST">
               @csrf
-                <h1 class="h3 mb-5 fw-normal text-center">Perpustakaan Digital Login</h1>
+                <h1 class="h3 mb-5 fw-normal text-center">Reset Password</h1>
             
                 <div class="form-floating">
                   <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="name@example.com" autofocus required value="{{ old('email') }}">
@@ -34,17 +34,9 @@
                         {{ $message }}
                       </div>
                   @enderror
-                </div>
-                <div class="form-floating">
-                  <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                  <label for="password">Password</label>
-                </div>
-            
 
-                <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                <button class="btn btn-primary w-100 py-2" type="submit">Submit</button>
 
-                <small class="d-block text-center mt-3">Lupa Password ? <a href="/contact">Hubungi Admin</a></small>
-                <small class="d-block text-center mt-3">Belum Punya Akun? <a href="/register">Daftar Sekarang!</a></small>
 
                 <p class="d-flex mt-4 mb-3 text-body-secondary justify-content-end">&copy; 2024</p>
               </form>
