@@ -46,13 +46,8 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-
-
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
-
-Route::get('/forgot_password', [ForgotPasswordController::class, 'index'])->middleware('guest');
-Route::post('/forgot_password', [ForgotPasswordController::class, 'forgot_password']);
 
 Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
@@ -74,12 +69,9 @@ Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::post('/update_password_confirm/{id}', [AdminController::class, 'update_password_confirm']);
     Route::get('/add_user', [AdminController::class, 'add_user']);
     Route::post('/add_user_confirm', [AdminController::class, 'add_user_confirm']);
-
-
+    Route::get('/user_export', [AdminController::class, 'user_export']);
+    Route::get('/buku_export', [AdminController::class, 'buku_export']);
 });
-
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
 
 Route::middleware('auth', 'onlyuser')->group(function () {
     Route::get('/peminjaman/{id}', [PeminjamanController::class, 'index']);
@@ -87,7 +79,8 @@ Route::middleware('auth', 'onlyuser')->group(function () {
     Route::get('/koleksi', [PeminjamanController::class, 'koleksi']);
     Route::post('/add_comment/{id}', [PeminjamanController::class, 'add_comment']);
     Route::post('/delete_comment/{id}', [PeminjamanController::class, 'delete_comment']);
-
+    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/home', [HomeController::class, 'index']);
 });
 
 

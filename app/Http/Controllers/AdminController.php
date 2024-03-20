@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BukuExport;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Peminjaman;
-use App\Models\Kategoribuku;
+use App\Exports\UsersExport;
 
+use App\Models\Kategoribuku;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
@@ -224,6 +227,16 @@ public function add_user_confirm(Request $request)
    User::create($validatedData);
    return redirect('data_users')->with('addSuccess', 'User Berhasil Ditambahkan');
 
+}
+
+public function user_export()
+{
+    return Excel::download(new UsersExport, 'Laporan Users.xlsx');
+}
+
+public function buku_export()
+{
+    return Excel::download(new BukuExport, 'Laporan Buku.xlsx');
 }
 
 }

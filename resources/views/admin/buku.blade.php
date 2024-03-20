@@ -119,7 +119,7 @@
 
                 <div class="table-responsive">
                     <table class="table mt-4">
-                      <a href="" class="btn btn-success">Generate Laporan</a>
+                      <a href="buku_export" class="btn btn-success">Generate Laporan</a>
                       <thead>
                         <tr>
                           <th>No.</th>
