@@ -72,6 +72,9 @@ Route::middleware('auth', 'onlyadmin')->group(function () {
     Route::get('/delete_user/{id}', [AdminController::class, 'delete_user']);
     Route::get('/update_password/{id}', [AdminController::class, 'update_password']);
     Route::post('/update_password_confirm/{id}', [AdminController::class, 'update_password_confirm']);
+    Route::get('/add_user', [AdminController::class, 'add_user']);
+    Route::post('/add_user_confirm', [AdminController::class, 'add_user_confirm']);
+
 
 });
 

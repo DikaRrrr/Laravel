@@ -9,6 +9,7 @@ use App\Models\Kategoribuku;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -115,7 +116,7 @@ class AdminController extends Controller
             $book->categories()->sync($request->categories);
         }
 
-        return redirect()->back()->with('addSuccess', 'Buku Berhasil Diupdate');
+        return redirect('add_book')->with('addSuccess', 'Buku Berhasil Diupdate');
     }
 
     public function data_peminjaman()
@@ -165,7 +166,7 @@ class AdminController extends Controller
     $catagory=Kategoribuku::find($id);
     $catagory->update($request->all());
 
-    return redirect()->back()->with('addSuccess', 'Kategori Berhasil Diupdate');
+    return redirect('catagory')->with('addSuccess', 'Kategori Berhasil Diupdate');
 }
 
 public function delete_user($id)
@@ -193,8 +194,6 @@ public function update_password_confirm(Request $request, $id)
 
     $user = User::findOrFail($id);
 
-    // Check if the old password matches the current password
-
     // Update the password
     $user->password = Hash::make($request->new_password);
     $user->save();
@@ -202,6 +201,29 @@ public function update_password_confirm(Request $request, $id)
     return redirect()->back()->with('addSuccess', 'Password updated successfully.');
 }
 
+public function add_user(Request $request)
+{
+    $user=User::all();
 
+    return view('admin.add_user', [
+        'title' => "Tambah User",
+        'user' => $user
+    ]);
+}
+
+public function add_user_confirm(Request $request)
+{
+   $validatedData = $request->validate([
+    'username' => ['required', 'min:3'],
+    'password' => ['required', 'min:8'],
+    'email' => ['required', 'email:dns', 'unique:users'],
+    'namalengkap' =>['required'],
+    'alamat' =>['required'],
+    'posisi' => 'required|in:user,admin,petugas',   ]);
+
+   User::create($validatedData);
+   return redirect('data_users')->with('addSuccess', 'User Berhasil Ditambahkan');
+
+}
 
 }

@@ -71,8 +71,8 @@
                           <thead>
                             <tr>
                               <th> ID </th>
-                              <th> user_id </th>
-                              <th> buku_id </th>
+                              <th> User ID </th>
+                              <th> Buku ID </th>
                               <th> Tanggal Peminjaman </th>
                               <th> Tanggal Pengembalian </th>
                               <th> Action</th>

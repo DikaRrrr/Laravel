@@ -62,6 +62,12 @@
                       <div class="card">
                         <div class="card-body">
                           <h4 class="card-title">Data Users</h4>
+                          <a href="#" class="btn btn-success">Generate Laporan</a>
+                          @if (auth()->user()->posisi ==='admin')
+                          <div class="mt-5 mb-3">
+                            <a href="/add_user" class="btn btn-primary">Tambah User</a>
+                          </div>
+                          @endif
                           <div class="table-responsive">
                             <table class="table">
                               <thead>

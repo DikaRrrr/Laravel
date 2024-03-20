@@ -37,7 +37,7 @@ class LoginController extends Controller
             }
 
             if(Auth::user()->posisi == 'petugas') {
-                return redirect('/');
+                return redirect('dashboard');
             }
  
             return redirect()->intended('home');
