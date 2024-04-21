@@ -66,7 +66,8 @@
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title">Data Peminjaman</h4>
-                      <div class="table-responsive">
+                      <a href="peminjaman_export" class="btn btn-success">Generate Laporan</a>
+                      <div class="table-responsive mt-4">
                         <table class="table">
                           <thead>
                             <tr>

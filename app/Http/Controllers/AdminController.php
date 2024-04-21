@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\BukuExport;
 use App\Models\Buku;
 use App\Models\User;
 use App\Models\Peminjaman;
+use App\Exports\BukuExport;
 use App\Exports\UsersExport;
 
 use App\Models\Kategoribuku;
 use Illuminate\Http\Request;
+use App\Exports\PeminjamanExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -237,6 +238,11 @@ public function user_export()
 public function buku_export()
 {
     return Excel::download(new BukuExport, 'Laporan Buku.xlsx');
+}
+
+public function peminjaman_export()
+{
+    return Excel::download(new PeminjamanExport, 'Laporan Peminjaman.xlsx');
 }
 
 }
