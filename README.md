@@ -21,4 +21,12 @@ NOTE: Aplikasi ini tidak menggunakan seeder jadi ketika ingin login sebagai admi
 
  ## ERD
 
+ ![Gambar ERD](erd.png)
+
+ ## Use Case
+
+ ![Gambar Diagram Usecase](uml.png)
+
+
+
 
